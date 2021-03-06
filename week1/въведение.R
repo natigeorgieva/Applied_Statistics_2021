@@ -6,12 +6,12 @@ pi; exp(1)  #; for Multiple commands
 
 aVariable1<-1
 aVariable2<-2
-aVariable3=3  # '<-' è '=' ñà åêâèâàëåíòíè
+aVariable3=3  # '<-' Ð¸ '=' ÑÐ° ÐµÐºÐ²Ð¸Ð²Ð°Ð»ÐµÐ½Ñ‚Ð½Ð¸
 aVariable1
-print(aVariable1+10) # print() ìîæå è äà ñå ïðîïóñíå
+print(aVariable1+10) # print() Ð¼Ð¾Ð¶Ðµ Ð¸ Ð´Ð° ÑÐµ Ð¿Ñ€Ð¾Ð¿ÑƒÑÐ½Ðµ
 (aVariable1+5)
 print(aVariable4<-4)
-avariable1+aVariable3      # Ãëàâíèòå áóêâè ñà îò çíà÷åíèå
+avariable1+aVariable3      # Ð“Ð»Ð°Ð²Ð½Ð¸Ñ‚Ðµ Ð±ÑƒÐºÐ²Ð¸ ÑÐ° Ð¾Ñ‚ Ð·Ð½Ð°Ñ‡ÐµÐ½Ð¸Ðµ
 aVariable1+aVariable3
 
 ############################################################
