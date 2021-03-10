@@ -5,20 +5,20 @@ mean.and.sd <- function(x){
   sdev <- sd(x)
   return(c(mean=av, SD=sdev))
 }
-uniData<-runif(1000,min = 0,max = 1)  # runif - генерира равномерно разпределени сл.в.
+uniData<-runif(1000,min = 0,max = 1)  # runif - РіРµРЅРµСЂРёСЂР° СЂР°РІРЅРѕРјРµСЂРЅРѕ СЂР°Р·РїСЂРµРґРµР»РµРЅРё СЃР».РІ.
 1/2; sqrt(1/12)
 mean.and.sd(uniData)
 
 ### if, else, for, repeat, while, break, next ###
 # if Statement
 a<-sample((-100):100,1)
-if (a>0) print(paste("Числото",a,"е положително!",sep = " "))
+if (a>0) print(paste("Р§РёСЃР»РѕС‚Рѕ",a,"Рµ РїРѕР»РѕР¶РёС‚РµР»РЅРѕ!",sep = " "))
 
 # if () {} else {}
 a<-sample(100:1000,1)
 b=2
-deliSe=paste("Числото",a,"се дели на",b,"!",sep = " ")
-neSeDeli=paste("Числото",a,"не се дели на",b,"!",sep = " ")
+deliSe=paste("Р§РёСЃР»РѕС‚Рѕ",a,"СЃРµ РґРµР»Рё РЅР°",b,"!",sep = " ")
+neSeDeli=paste("Р§РёСЃР»РѕС‚Рѕ",a,"РЅРµ СЃРµ РґРµР»Рё РЅР°",b,"!",sep = " ")
 
 if (a%%b==0) { print(deliSe) 
 } else {print(neSeDeli)}
@@ -30,7 +30,7 @@ ifelse(a%%b==0, deliSe, neSeDeli)
 n=30
 for (i in 1:n){
   a<-sample(100:1000,1)
-  if (a%%2==0 & a%%3==0) print(paste("Числото",a,"се дели на 6!",sep = " "))
+  if (a%%2==0 & a%%3==0) print(paste("Р§РёСЃР»РѕС‚Рѕ",a,"СЃРµ РґРµР»Рё РЅР° 6!",sep = " "))
 }
 
 # repeat + break
