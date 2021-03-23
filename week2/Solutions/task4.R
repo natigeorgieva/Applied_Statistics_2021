@@ -1,4 +1,4 @@
-### Задача 4 ###
+### Р—Р°РґР°С‡Р° 4 ###
 
 rand.Circle <- function(n,x_0=0,y_0=0,r=1){
   theta = 2*pi*runif(n,0,1);
