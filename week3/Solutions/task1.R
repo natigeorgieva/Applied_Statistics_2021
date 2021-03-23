@@ -1,5 +1,5 @@
 
-### Задача 1 ###
+### Р—Р°РґР°С‡Р° 1 ###
 
 square.approx.Pi<- function(trials){
   x=runif(trials,min = -1,max = 1);
