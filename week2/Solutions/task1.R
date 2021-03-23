@@ -1,9 +1,9 @@
-### Задача 1 ### 
-?rnorm # повече за rnorm, който не знае
-normData<-rnorm(10000,0,1) # генерираме: n=10000, mean=0, sd=1
+### Р—Р°РґР°С‡Р° 1 ### 
+?rnorm # РїРѕРІРµС‡Рµ Р·Р° rnorm, РєРѕР№С‚Рѕ РЅРµ Р·РЅР°Рµ
+normData<-rnorm(10000,0,1) # РіРµРЅРµСЂРёСЂР°РјРµ: n=10000, mean=0, sd=1
 
-hist(normData,prob=TRUE,xlab = 'Simulated observations') #добра практика е да видите как изглеждат нашите данни на графика
-curve(dnorm(x, mean=mean(normData), sd=sd(normData)), add=TRUE, col=2,lwd=2) # Изчертава крива, съответстваща на функция през интервала.
+hist(normData,prob=TRUE,xlab = 'Simulated observations') #РґРѕР±СЂР° РїСЂР°РєС‚РёРєР° Рµ РґР° РІРёРґРёС‚Рµ РєР°Рє РёР·РіР»РµР¶РґР°С‚ РЅР°С€РёС‚Рµ РґР°РЅРЅРё РЅР° РіСЂР°С„РёРєР°
+curve(dnorm(x, mean=mean(normData), sd=sd(normData)), add=TRUE, col=2,lwd=2) # РР·С‡РµСЂС‚Р°РІР° РєСЂРёРІР°, СЃСЉРѕС‚РІРµС‚СЃС‚РІР°С‰Р° РЅР° С„СѓРЅРєС†РёСЏ РїСЂРµР· РёРЅС‚РµСЂРІР°Р»Р°.
 
 ?dnorm # Density, distribution function, quantile function and random generation for the normal distribution with mean equal to mean and standard deviation equal to sd.
 ?curve #Draws a curve corresponding to a function over the interval [from, to]. curve can plot also an expression in the variable xname, default x.
