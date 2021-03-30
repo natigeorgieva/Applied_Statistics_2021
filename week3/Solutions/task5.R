@@ -1,10 +1,48 @@
-### Р—Р°РґР°С‡Р° 5 ### (Chi-square test for independence)
-# РљР°С‚Рѕ РёР·РїРѕР»Р·РІР°С‚Рµ РґР°РЅРЅРёС‚Рµ "Titanic.csv", РїСЂРѕРІРµСЂРµС‚Рµ РґР°Р»Рё РєР»Р°СЃР°С‚Р° РЅР° Р±РёР»РµС‚Р° РЅР° РµРґРёРЅ РїСЉС‚СѓРІР°С‰ 
-# РѕРєР°Р·РІР° РІР»РёСЏРЅРёРµ РЅР° С‚РѕРІР° РґР°Р»Рё С‚РѕР№ Рµ РѕС†РµР»СЏР».
+### Задача 5 ### (Chi-square test for independence)
+titanic <- read.csv("https://github.com/natigeorgieva/Applied_Statistics_2021/blob/main/week3/Data/Titanic.csv")
+head(titanic)
+sum(table(titanic$Survived)) #Преброяване на общия брой пътници
 
-dataTitanic$Survived=as.factor(dataTitanic$Survived)
-levels(dataTitanic$Survived)=c("Died","Survived")
-str(dataTitanic)
-tableSC=table(dataTitanic$Survived,dataTitanic$PClass)
-chisq.test(tableSC)
-summary(tableSC)
+#Преброяване на броя на хората, оцелели от потъващия титаник
+t=data.frame(table(titanic$Survived))
+names(t)[1]= 'Survived'
+t 
+#Виждаме, че 340 души са оцелели след трагедията. 
+
+#Изчисляваме процента на хората, оцелели след трагедията
+y=table(titanic$Survived)
+prop.table(y)*100
+#Както се вижда, 38,24% от хората са оцелели.
+
+#Сега нека да преброим броя на първокласните пътници, оцелели от потъването на Титаник.
+mytable <- xtabs(~Survived + Pclass,data= titanic[titanic$Pclass=="1", ])
+mytable
+#По този начин броят на оцелелите от 1-ви клас е 134
+
+#Да намерим процента на първокласните пътници, оцелели от потъването на Титаник. 
+prop.table(mytable)*100
+
+#Нека използваме R, за да преброим броя на жените от Първа класа, които са оцелели от потъването на Титаник
+mytable1=(subset(titanic,Pclass=='1' & Survived=='1',select=c(Pclass,Survived,Sex)))
+ftable(mytable1)
+#Така 89 жени от 1-ви клас оцелели след потъването на титаника
+
+#Нека използваме R, за да измерим процента на оцелелите, които са жени, т.е. процент само от оцелелите хора, 
+#влюбени както в мъже, така и в жени.
+
+q = subset(titanic,Survived=='1',select=c(Sex,Survived))
+mytable2 <- xtabs(~Survived + Sex, data=q)
+prop.table(mytable2)*100
+#Така от оцелелите хора 67% от тях са жени
+
+#Нека използваме R, за да измерим процента на жените на борда на Титаник, които са оцелели, т.е. от общия брой пътници на борда
+p=xtabs(~Survived + Sex,data = titanic)
+prop.table(p)*100
+#По този начин 26% от жените и 12% от мъжете могат да бъдат спасени само
+
+#Нека да проведем тест на Pearson’s Chi-squared test, за да проверим следната хипотеза: Делът на жените на борда, които са оцелели от потъването 
+#на Титаник, е по-висок от дела на мъжете на борда, които са оцелели от потъването на Титаник.
+chisq.test(p)
+assocstats(p)
+#Тъй като р-стойността е много малка, ние отхвърляме нулевата хипотеза и приемаме алтернативната хипотеза и следователно делът на жените на 
+#борда, оцелели от потъването на Титаник, е по-висок от дела на мъжете на борда, оцелели от потъването на Титаник.
