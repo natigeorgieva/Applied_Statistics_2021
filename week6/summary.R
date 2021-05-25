@@ -1,14 +1,14 @@
 rm(list=ls())
 # install.packages("readxl")
 library(readxl)
-# Запазване на данните в променливата 'rawData'
+# Р—Р°РїР°Р·РІР°РЅРµ РЅР° РґР°РЅРЅРёС‚Рµ РІ РїСЂРѕРјРµРЅР»РёРІР°С‚Р° 'rawData'
 rawData=as.data.frame(read_excel("Data\\COVID-19_data.xlsx",sheet=1))
 
-# Описание на променливите
+# РћРїРёСЃР°РЅРёРµ РЅР° РїСЂРѕРјРµРЅР»РёРІРёС‚Рµ
 read_excel("Data\\COVID-19_data.xlsx",sheet=2) 
 str(rawData)
 
-# Преобразуване на категорните данни във факторни променливи
+# РџСЂРµРѕР±СЂР°Р·СѓРІР°РЅРµ РЅР° РєР°С‚РµРіРѕСЂРЅРёС‚Рµ РґР°РЅРЅРё РІСЉРІ С„Р°РєС‚РѕСЂРЅРё РїСЂРѕРјРµРЅР»РёРІРё
 rawData$dateRep=as.factor(rawData$dateRep)
 rawData$countries=as.factor(rawData$countries)
 rawData$countryCode=as.factor(rawData$countryCode)
@@ -16,16 +16,16 @@ rawData$continent=as.factor(rawData$continent)
 str(rawData)
 # edit(rawData)
 
-# Основни дескриптивни статистики на променливите
+# РћСЃРЅРѕРІРЅРё РґРµСЃРєСЂРёРїС‚РёРІРЅРё СЃС‚Р°С‚РёСЃС‚РёРєРё РЅР° РїСЂРѕРјРµРЅР»РёРІРёС‚Рµ
 summary(rawData)
 
-# Премахване на наблюденията (страните) без брой на населението
+# РџСЂРµРјР°С…РІР°РЅРµ РЅР° РЅР°Р±Р»СЋРґРµРЅРёСЏС‚Р° (СЃС‚СЂР°РЅРёС‚Рµ) Р±РµР· Р±СЂРѕР№ РЅР° РЅР°СЃРµР»РµРЅРёРµС‚Рѕ
 rawData[is.na(rawData$population),]
 cleanData=rawData[!is.na(rawData$population),] 
 str(cleanData)
 summary(cleanData)
 
-################### Данни за България ####################
+################### Р”Р°РЅРЅРё Р·Р° Р‘СЉР»РіР°СЂРёСЏ ####################
 countryName='Bulgaria'
 dataBGR=cleanData[cleanData$countries==countryName,]
 summary(dataBGR)
@@ -37,9 +37,9 @@ plot(dataBGR$totalDays,dataBGR$deaths,
      col=rgb(215/255,0,0),pch=21,bg=rgb(215/255,0,0),cex=1.5)
 lines(dataBGR$totalDays,dataBGR$deaths,lwd=2)
 
-################################### Задача 1 #################################
-# Проверете дали настъпилият ежедневен брой на смъртните случаи в България е
-# Поасоново разпределен.
+################################### Р—Р°РґР°С‡Р° 1 #################################
+# РџСЂРѕРІРµСЂРµС‚Рµ РґР°Р»Рё РЅР°СЃС‚СЉРїРёР»РёСЏС‚ РµР¶РµРґРЅРµРІРµРЅ Р±СЂРѕР№ РЅР° СЃРјСЉСЂС‚РЅРёС‚Рµ СЃР»СѓС‡Р°Рё РІ Р‘СЉР»РіР°СЂРёСЏ Рµ
+# РџРѕР°СЃРѕРЅРѕРІРѕ СЂР°Р·РїСЂРµРґРµР»РµРЅ.
 # Chi-square test
 xf=table(dataBGR$deaths)
 lambdaEst=mean(dataBGR$deaths)
@@ -53,15 +53,15 @@ lambdaEst=mean(dataBGR$deaths)
 ks.test(dataBGR$deaths,"ppois",lambda=lambdaEst)
 #######################################################################################
 
-############################# Разделяне по континенти #################################
+############################# Р Р°Р·РґРµР»СЏРЅРµ РїРѕ РєРѕРЅС‚РёРЅРµРЅС‚Рё #################################
 lastDay=cleanData[cleanData$dateRep=='2020-04-06',]
 rowCases=tapply(lastDay$totalCases,lastDay$continent,FUN=sum)
 rowDeaths=tapply(lastDay$totalDeaths,lastDay$continent,FUN=sum)
 rowPopulation=tapply(lastDay$population,lastDay$continent,FUN=sum)
 
-################################### Задача 2 #################################
-# Използвайки горните данни, проверете процента на разпространение на COVID-19
-# е еднакъв на всички континенти. А процентът на смъртните случаи?
+################################### Р—Р°РґР°С‡Р° 2 #################################
+# РР·РїРѕР»Р·РІР°Р№РєРё РіРѕСЂРЅРёС‚Рµ РґР°РЅРЅРё, РїСЂРѕРІРµСЂРµС‚Рµ РїСЂРѕС†РµРЅС‚Р° РЅР° СЂР°Р·РїСЂРѕСЃС‚СЂР°РЅРµРЅРёРµ РЅР° COVID-19
+# Рµ РµРґРЅР°РєСЉРІ РЅР° РІСЃРёС‡РєРё РєРѕРЅС‚РёРЅРµРЅС‚Рё. Рђ РїСЂРѕС†РµРЅС‚СЉС‚ РЅР° СЃРјСЉСЂС‚РЅРёС‚Рµ СЃР»СѓС‡Р°Рё?
 
 tableCases=rbind(rowPopulation-rowCases,rowCases)
 rownames(tableCases)=c("Non-Infected","Infected")
@@ -75,7 +75,7 @@ tableDeaths
 chisq.test(tableDeaths)
 100*rowDeaths/rowCases
 
-########## Помощна функция за конструирането на доверителни криви ########## 
+########## РџРѕРјРѕС‰РЅР° С„СѓРЅРєС†РёСЏ Р·Р° РєРѕРЅСЃС‚СЂСѓРёСЂР°РЅРµС‚Рѕ РЅР° РґРѕРІРµСЂРёС‚РµР»РЅРё РєСЂРёРІРё ########## 
 plotConfLines<-function(model,y,x){
         minX=floor(min(x))
         maxX=ceiling(max(x))
@@ -131,7 +131,7 @@ legend('bottomright',
        legend = c('Linear','Quadratic','Cubic'),
        col=c(rgb(220/255,0,0),rgb(0,115/255,0),rgb(0,0,233/255)),lwd=3)
 
-###### Прогнози за следващата седмица ###############
+###### РџСЂРѕРіРЅРѕР·Рё Р·Р° СЃР»РµРґРІР°С‰Р°С‚Р° СЃРµРґРјРёС†Р° ###############
 newX=as.data.frame((max(dataBGR$totalDays)+1):(max(dataBGR$totalDays)+7))
 names(newX)="x"
 
